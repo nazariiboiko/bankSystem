@@ -1,6 +1,7 @@
 package com.example.banksystem.entity;
 
 import jakarta.persistence.*;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jdk.jfr.BooleanFlag;
@@ -15,8 +16,8 @@ import java.math.BigDecimal;
 public class Account {
 
     @Id
-    @Column(name = "id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="id",updatable=false,nullable=false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "name", nullable = false)
@@ -38,7 +39,7 @@ public class Account {
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    private Client user;
 
     @BooleanFlag
     @Column(name = "active", nullable = false)
@@ -47,7 +48,7 @@ public class Account {
 
     public Account(){}
 
-    public Account(Long id, String name, String accountNumber, Currency currency, BigDecimal balance, User user, boolean isActive) {
+    public Account(Long id, String name, String accountNumber, Currency currency, BigDecimal balance, Client user, boolean isActive) {
         this.id = id;
         this.name = name;
         this.accountNumber = accountNumber;

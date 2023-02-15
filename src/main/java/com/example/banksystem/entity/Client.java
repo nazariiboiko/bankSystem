@@ -1,9 +1,13 @@
 package com.example.banksystem.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.NumberFormat;
 
 import java.util.Date;
 import java.util.List;
@@ -12,11 +16,10 @@ import java.util.List;
 @Table(name = "users", uniqueConstraints={@UniqueConstraint(columnNames={"login"})})
 @Getter
 @Setter
-public class User extends BaseEntity {
+public class Client {
 
     @Id
-    @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pet_seq")
     private Long id;
 
     @Column(name = "login", nullable = false, unique = true)
@@ -36,15 +39,15 @@ public class User extends BaseEntity {
     private String lastName;
 
     @Column(name = "age", nullable = false)
-    @NotBlank
+    @NumberFormat
     private Integer age;
 
     @Column(name = "email", nullable = true)
+    @Email
     private String email;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false)
-    @NotBlank
     private Role role;
 
     @Column(name = "registered")
@@ -53,7 +56,7 @@ public class User extends BaseEntity {
     @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER, mappedBy = "user")
     private List<Account> accounts;
 
-    public User(String login, String password, String firstName, String lastName, Integer age, String email, Role role) {
+    public Client(String login, String password, String firstName, String lastName, Integer age, String email, Role role) {
         this.login = login;
         this.password = password;
         this.firstName = firstName;
@@ -63,7 +66,7 @@ public class User extends BaseEntity {
         this.role = role;
     }
 
-    public User(){}
+    public Client(){}
 
     @Override
     public boolean equals(Object o) {
@@ -73,7 +76,7 @@ public class User extends BaseEntity {
         if(o == null || o.getClass() != this.getClass())
             return false;
 
-        User user = (User) o;
+        Client user = (Client) o;
 
         return this.getId().equals(user.getId());
 
