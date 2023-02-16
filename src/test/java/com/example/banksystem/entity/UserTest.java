@@ -18,7 +18,8 @@ public class UserTest {
                 "Nazarii",
                 "Boiko",
                 20,
-                "nazarii.boiko2@gmail.com", Role.ROLE_DEVELOPER);
+                "nazarii.boiko2@gmail.com", Role.ROLE_DEVELOPER,
+                true);
 
         user.setAccounts(List.of());
         user.setRegistered(new Date(2000));

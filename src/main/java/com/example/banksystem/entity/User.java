@@ -5,8 +5,8 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import lombok.Getter;
-import lombok.Setter;
+import jdk.jfr.BooleanFlag;
+import lombok.Data;
 import org.springframework.format.annotation.NumberFormat;
 
 import java.util.Date;
@@ -14,9 +14,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "users", uniqueConstraints={@UniqueConstraint(columnNames={"login"})})
-@Getter
-@Setter
-public class Client {
+@Data
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pet_seq")
@@ -56,7 +55,11 @@ public class Client {
     @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER, mappedBy = "user")
     private List<Account> accounts;
 
-    public Client(String login, String password, String firstName, String lastName, Integer age, String email, Role role) {
+    @BooleanFlag
+    @Column(name = "active", nullable = true)
+    private boolean isActive;
+
+    public User(String login, String password, String firstName, String lastName, Integer age, String email, Role role, Boolean isActive) {
         this.login = login;
         this.password = password;
         this.firstName = firstName;
@@ -64,9 +67,10 @@ public class Client {
         this.age = age;
         this.email = email;
         this.role = role;
+        this.isActive = isActive;
     }
 
-    public Client(){}
+    public User(){}
 
     @Override
     public boolean equals(Object o) {
@@ -76,7 +80,7 @@ public class Client {
         if(o == null || o.getClass() != this.getClass())
             return false;
 
-        Client user = (Client) o;
+        User user = (User) o;
 
         return this.getId().equals(user.getId());
 

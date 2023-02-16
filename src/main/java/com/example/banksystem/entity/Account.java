@@ -39,7 +39,7 @@ public class Account {
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
-    private Client user;
+    private User user;
 
     @BooleanFlag
     @Column(name = "active", nullable = false)
@@ -48,7 +48,7 @@ public class Account {
 
     public Account(){}
 
-    public Account(Long id, String name, String accountNumber, Currency currency, BigDecimal balance, Client user, boolean isActive) {
+    public Account(Long id, String name, String accountNumber, Currency currency, BigDecimal balance, User user, boolean isActive) {
         this.id = id;
         this.name = name;
         this.accountNumber = accountNumber;
