@@ -12,14 +12,17 @@
     <div class="row ">
         <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card bg-white">
             <div class="card-body">
-                <form th:action="@{/login}"  method="POST">
+                <form th:action="@{/login}" method="POST">
                     <div class="mb-3">
-                        <label class="form-label">Phone number</label>
-                        <input type="number" class="form-control" id="login "name="login" required">
+                        <div th:if="${param.error}" class="alert alert-error">
+                            Invalid username or password.
+                        </div>
+                        <label for="username" class="form-label">Phone number</label>
+                        <input type="text" class="form-control" id="username" name="username" required />
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Password</label>
-                        <input type="password" class="form-control" id="password" name="password" required">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" required />
                     </div>
                     <div class="mb-3 text-center">
                         <button type="submit" class="btn btn-lg btn-dark ">Log in</button>

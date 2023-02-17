@@ -9,51 +9,45 @@ import java.util.Collection;
 import java.util.List;
 
 public class SecurityUser implements UserDetails {
-    private final String phoneNumber;
-    private final String password;
-    private final List<SimpleGrantedAuthority> authorities;
-    private final boolean isActive;
+    private User user;
 
-    public SecurityUser(String phoneNumber, String password, List<SimpleGrantedAuthority> authorities, boolean isActive) {
-        this.phoneNumber = phoneNumber;
-        this.password = password;
-        this.authorities = authorities;
-        this.isActive = isActive;
+    public SecurityUser(User user) {
+        this.user = user;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authorities;
+        return user.getRole().getAuthorities();
     }
 
     @Override
     public String getPassword() {
-        return password;
+        return user.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return phoneNumber;
+        return user.getLogin();
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return isActive;
+        return user.isActive();
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return isActive;
+        return user.isActive();
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return isActive;
+        return user.isActive();
     }
 
     @Override
     public boolean isEnabled() {
-        return isActive;
+        return user.isActive();
     }
 
     public static UserDetails fromUser(User user) {

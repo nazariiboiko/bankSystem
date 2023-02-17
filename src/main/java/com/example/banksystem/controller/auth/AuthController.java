@@ -20,8 +20,8 @@ public class AuthController {
         return "loginForm";
     }
 
-    @PostMapping
-    public String validateUser() {
-        throw new UnsupportedOperationException();
-    }
+//    @PostMapping
+//    public String validateUser() {
+//        throw new UnsupportedOperationException();
+//    }
 }

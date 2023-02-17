@@ -38,13 +38,6 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public void delete(User user) {
-
-    }
-
-    @Override
-    public UserDetails loadUserByPhoneNumber(String phoneNumber) throws UsernameNotFoundException {
-        User user = userRepository.findByLogin(phoneNumber).orElseThrow(() ->
-                new UsernameNotFoundException("User doesn't exists"));
-        return SecurityUser.fromUser(user);
+        userRepository.delete(user);
     }
 }
