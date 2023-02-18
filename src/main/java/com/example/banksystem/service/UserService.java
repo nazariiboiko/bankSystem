@@ -12,4 +12,6 @@ public interface UserService {
     User save(User user);
     User update(User user);
     void delete(User user);
+    User getByPhoneNumber(String phoneNumber);
+    void deleteById(Long id);
 }

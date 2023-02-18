@@ -23,13 +23,36 @@ public class UserController {
     @GetMapping("/new")
     public String addUser(Model model) {
         User user = new User();
-        model.addAttribute("client", user);
+        user.setActive(true);
+        user.setId(Long.valueOf(-1));
+        model.addAttribute("user", user);
         return "userCreateForm";
     }
 
-    @PostMapping
+    @PostMapping("/new")
     public String addUser(@ModelAttribute("client") User client) {
         userService.save(client);
         return "redirect:/users";
+    }
+
+    @GetMapping("/{id}")
+    public String getInfo(@PathVariable("id") Long id, Model model) {
+        User user = userService.get(id);
+        model.addAttribute("user", user);
+        model.addAttribute("date", user.getRegistered().getTime());
+        return "home";
+    }
+
+    @PostMapping("/delete/{id}")
+    public String deleteUser(@PathVariable("id") Long id) {
+        userService.deleteById(id);
+        return "redirect:/users";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String editUser(@PathVariable("id") Long id, Model model) {
+        User user = userService.get(id);
+        model.addAttribute("user", user);
+        return "userCreateForm";
     }
 }

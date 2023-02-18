@@ -13,7 +13,10 @@
     <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
       <h1 class="text-center">Add a Client</h1>
       <div class="card-body">
-        <form th:action="@{/clients}" th:object="${client}" method="POST">
+        <form th:action="@{/users/new}" th:object="${user}" method="POST">
+          <div class="mb-3">
+            <p th:text="'id ' + ${user.id}"></p>
+          </div>
           <div class="mb-3">
             <label class="form-label">First name</label>
             <input type="text" class="form-control" name="firstName" th:field="*{firstName}">
@@ -46,6 +49,14 @@
               <option value="ROLE_HELPER">Helper</option>
               <option value="ROLE_DEVELOPER">Developer</option>
             </select>
+          </div>
+          <div class="mb-3">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" th:field="*{active}" id="flexCheckIndeterminate">
+              <label class="form-check-label" for="flexCheckIndeterminate">
+                Active
+              </label>
+            </div>
           </div>
           <div class="mb-3 text-center">
             <button type="submit" class="btn btn-lg btn-primary">Submit</button>
