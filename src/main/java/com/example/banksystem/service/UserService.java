@@ -10,7 +10,7 @@ public interface UserService {
     List<User> getAll();
     User get(Long id);
     User save(User user);
-    User update(User user);
+    User update(Long id, User user);
     void delete(User user);
     User getByPhoneNumber(String phoneNumber);
     void deleteById(Long id);

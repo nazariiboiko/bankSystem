@@ -30,12 +30,12 @@ public class UserController {
     }
 
     @PostMapping("/new")
-    public String addUser(@ModelAttribute("client") User client) {
-        userService.save(client);
+    public String addUser(@ModelAttribute("client") User user) {
+        userService.save(user);
         return "redirect:/users";
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/details/{id}")
     public String getInfo(@PathVariable("id") Long id, Model model) {
         User user = userService.get(id);
         model.addAttribute("user", user);
@@ -53,6 +53,20 @@ public class UserController {
     public String editUser(@PathVariable("id") Long id, Model model) {
         User user = userService.get(id);
         model.addAttribute("user", user);
-        return "userCreateForm";
+        return "userEditForm";
+    }
+
+    @PostMapping("/edit/{id}")
+    public String editUser(@PathVariable("id") Long id, @ModelAttribute("client") User user) {
+        userService.update(id, user);
+        return "redirect:/users";
+    }
+
+    @PostMapping("/block/{id}")
+    public String blockUser(@PathVariable("id") Long id) {
+        User user = userService.get(id);
+        user.setActive(false);
+        userService.save(user);
+        return "redirect:/users";
     }
 }
