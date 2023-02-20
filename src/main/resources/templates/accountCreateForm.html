@@ -12,14 +12,14 @@
 <div class="container">
   <div class="row ">
     <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
-      <h1 class="text-center">Add a Client</h1>
+      <h1 class="text-center">Add an Account</h1>
       <div class="card-body">
-        <form th:action="@{/users/edit/{id}(id=${user.id})}" th:object="${user}" method="POST">
+        <form th:action="@{/account/new}" th:object="${account}" method="POST">
           <div class="mb-3">
             <p th:text="'id ' + ${user.id}"></p>
           </div>
           <div class="mb-3">
-            <label class="form-label">First name</label>
+            <label class="form-label">Name</label>
             <input type="text" class="form-control" name="firstName" th:field="*{firstName}">
           </div>
           <div class="mb-3">
@@ -27,28 +27,11 @@
             <input type="text" class="form-control" name="lastName" th:field="*{lastName}">
           </div>
           <div class="mb-3">
-            <label  class="form-label">Age</label>
-            <input type="number"  class="form-control" th:field="*{age}">
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Email address</label>
-            <input type="email"  class="form-control"  th:field="*{email}">
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Phone number</label>
-            <input type="number"  class="form-control" th:field="*{login}">
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Password</label>
-            <input type="text"  class="form-control" th:field="*{password}">
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Role</label>
-            <select class="form-select form-control" th:field="*{role}">
-              <option value="ROLE_USER">User</option>
-              <option value="ROLE_WORKER">Worker</option>
-              <option value="ROLE_HELPER">Helper</option>
-              <option value="ROLE_DEVELOPER">Developer</option>
+            <label class="form-label">Currency</label>
+            <select class="form-select form-control" th:field="*{currency}">
+              <option value="USD">USD</option>
+              <option value="EUR">EUR</option>
+              <option value="UAH">UAH</option>
             </select>
           </div>
           <div class="mb-3">

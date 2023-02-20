@@ -1,6 +1,5 @@
 package com.example.banksystem.entity;
 
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.Set;
