@@ -1,7 +1,6 @@
 package com.example.banksystem.entity;
 
 import jakarta.persistence.*;
-
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jdk.jfr.BooleanFlag;
@@ -9,6 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+
 @Entity
 @Table(name = "accounts", uniqueConstraints={@UniqueConstraint(columnNames={"account_number"})})
 @Getter
@@ -30,11 +30,9 @@ public class Account {
 
     @Enumerated(EnumType.STRING)
     @Column(name ="currency", nullable = false)
-    @NotNull
     private Currency currency;
 
     @Column(name = "balance", nullable = false)
-    @NotNull
     private BigDecimal balance;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
@@ -57,4 +55,5 @@ public class Account {
         this.user = user;
         this.isActive = isActive;
     }
+
 }

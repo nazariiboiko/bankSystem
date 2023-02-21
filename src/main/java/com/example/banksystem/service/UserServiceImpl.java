@@ -16,8 +16,6 @@ public class UserServiceImpl implements UserService{
 
     @Autowired
     private UserRepository userRepository;
-    @PersistenceContext
-    private EntityManager entityManager;
 
     @Override
     public List<User> getAll() {

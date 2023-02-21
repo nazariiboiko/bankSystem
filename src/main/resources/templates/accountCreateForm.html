@@ -14,17 +14,17 @@
     <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
       <h1 class="text-center">Add an Account</h1>
       <div class="card-body">
-        <form th:action="@{/account/new}" th:object="${account}" method="POST">
+        <form th:action="@{/accounts/new/{id}(id=${id})}" th:object="${account}" method="POST">
           <div class="mb-3">
-            <p th:text="'id ' + ${user.id}"></p>
+            <p th:text="'id ' + ${account.id}"></p>
           </div>
           <div class="mb-3">
             <label class="form-label">Name</label>
-            <input type="text" class="form-control" name="firstName" th:field="*{firstName}">
+            <input type="text" class="form-control" name="name" th:field="*{name}">
           </div>
           <div class="mb-3">
-            <label class="form-label">Last name</label>
-            <input type="text" class="form-control" name="lastName" th:field="*{lastName}">
+            <label class="form-label">Balance</label>
+            <input type="number" class="form-control" name="balance" th:field="*{balance}">
           </div>
           <div class="mb-3">
             <label class="form-label">Currency</label>

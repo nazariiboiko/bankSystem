@@ -57,4 +57,10 @@ public class AccountServiceImpl implements AccountService{
         Account account = get(id);
         accountRepository.delete(account);
     }
+
+    @Override
+    @Transactional
+    public void block(Long id) {
+        accountRepository.blockAccount(id);
+    }
 }

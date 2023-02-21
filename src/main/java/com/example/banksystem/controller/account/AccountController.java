@@ -1,6 +1,7 @@
 package com.example.banksystem.controller.account;
 
 import com.example.banksystem.entity.Account;
+import com.example.banksystem.entity.User;
 import com.example.banksystem.service.AccountService;
 import com.example.banksystem.service.UserService;
 import com.example.banksystem.util.account.AccountGenerator;
@@ -32,45 +33,44 @@ public class AccountController {
     @GetMapping("/new/{id}")
     public String create(@PathVariable("id") Long id, Model model) {
         Account account = new Account();
-        account.setId(Long.valueOf(-1));
+        account.setId(-1L);
         account.setBalance(BigDecimal.valueOf(0));
-        account.setUser(userService.get(id));
         model.addAttribute("account", account);
+        model.addAttribute("id", id);
         return "accountCreateForm";
     }
 
-    @PostMapping("/new")
-    public String create(@ModelAttribute("account") Account account) {
-        String accountNumber = AccountGenerator.generateAccountNumber(account.getId(), account.getCurrency());
+    @PostMapping("/new/{id}")
+    public String create(@PathVariable("id") Long id, @ModelAttribute("account") Account account) {
+        User user = userService.get(id);
+        account.setUser(user);
+        String accountNumber = AccountGenerator.generateAccountNumber(user.getId(), account.getCurrency());
         account.setAccountNumber(accountNumber);
         accountService.save(account);
-        return "redirect:/users";
+        return "redirect:/accounts/" + id;
     }
 
-    @GetMapping("/edit/{id}")
-    public String update(@PathVariable("id") Long id, Model model) {
-        Account account = accountService.get(id);
-        model.addAttribute("account", account);
-        return "accountEditForm";
+    @PostMapping("/block/{userId}/{accountId}")
+    public String blockAccount(@PathVariable("userId") Long userId, @PathVariable("accountId") Long accountId) {
+        accountService.block(accountId);
+        return "redirect:/accounts/" + userId;
     }
 
-    @PostMapping("/edit/{id}")
-    public String update(@PathVariable("id") Long id, @ModelAttribute("account") Account account) {
-        accountService.update(account);
-        return "redirect:/users";
-    }
-
-    @PostMapping("/delete/{id}")
-    public String delete(@PathVariable Long id) {
-        accountService.delete(id);
-        return "redirect:/users";
+    @PostMapping("/delete/{userId}/{accountId}")
+    public String delete(@PathVariable("userId") Long userId, @PathVariable("accountId") Long accountId) {
+        accountService.delete(accountId);
+        return "redirect:/accounts/" + userId;
     }
 
     public String replenishBalance(Model model) {
         throw new UnsupportedOperationException();
     }
 
-    public String getTransaction(Model mode) {
+    public String withdrawBalance(Model model) {
+        throw new UnsupportedOperationException();
+    }
+
+    public String getTransaction(Model model) {
         throw new UnsupportedOperationException();
     }
 

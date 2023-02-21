@@ -47,7 +47,7 @@
 <div clas="container">
     <div class="row">
         <div class="col-lg-3">
-            <a th:href="@{/accounts/new}" class="btn btn-primary btn-sm mb-3">Add an Account</a>
+            <a th:href="@{/accounts/new/{id}(id=${id})}" class="btn btn-primary btn-sm mb-3">Add an Account</a>
         </div>
     </div>
     <table class="table table-dark-striper table-bordered">
@@ -67,8 +67,22 @@
             <td width="100" th:text="${account.accountNumber}"></td>
             <td width="100" th:text="${account.balance}"></td>
             <td width="100" th:text="${account.currency}"></td>
-            <td width="100" th:text="${account.active}"></td>
-            <td></td>
+            <td width="100" th:style="${account.active} == TRUE ? '' : 'background: red'" th:text="${account.active}"></td>
+            <td width="200">
+                <div>
+                    <div class="row d-flex justify-content-center">
+                        <button class="btn btn-info rounded-0 btn-size">Replenish</button>
+                        <button class="btn btn-info rounded-0 btn-size">Withdraw</button>
+                        <button class="btn btn-info rounded-0 btn-size">History</button>
+                        <form th:action="@{/accounts/block/{userId}/{accountId}(userId=${id}, accountId=${account.id})}" th:object="${account}" method="POST">
+                            <button class="btn btn-info rounded-0 btn-size">Block</button>
+                        </form>
+                        <form th:action="@{/accounts/delete/{userId}/{accountId}(userId=${id}, accountId=${account.id})}" th:object="${account}" method="POST">
+                            <button type="submit" class="btn btn-info rounded-0 btn-size">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </td>
         </tr>
         </tbody>
 
