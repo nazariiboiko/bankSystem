@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 //import javax.transaction.Transactional;
+import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -62,5 +63,11 @@ public class AccountServiceImpl implements AccountService{
     @Transactional
     public void block(Long id) {
         accountRepository.blockAccount(id);
+    }
+
+    @Override
+    @Transactional
+    public void replenish(Long id, BigDecimal value) {
+        accountRepository.replenish(id, value);
     }
 }

@@ -27,6 +27,7 @@ public class AccountController {
     public String listOfUsersAccounts(@PathVariable("id") Long id, Model model) {
         List<Account> accounts = accountService.getAllByUserId(id);
         model.addAttribute("accounts", accounts);
+        model.addAttribute("id", id);
         return "accountList";
     }
 
@@ -62,8 +63,14 @@ public class AccountController {
         return "redirect:/accounts/" + userId;
     }
 
-    public String replenishBalance(Model model) {
-        throw new UnsupportedOperationException();
+    @GetMapping("/balance/{userId}/{accountId}")
+    public String changeTheBalance(@PathVariable("userId") Long userId, @PathVariable("accountId") Long accountId) {
+        return "";
+    }
+    @PostMapping("/balance/{userId}/{accountId}")
+    public String changeTheBalance(@PathVariable("userId") Long userId, @PathVariable("accountId") Long accountId, @ModelAttribute("account") Account account) {
+        accountService.replenish(accountId, account.getBalance());
+        return "redirect:/accounts/" + userId;
     }
 
     public String withdrawBalance(Model model) {

@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="shortcut icon" type="image/x-icon" th:href="@{/webapp/img/favicon.ico}"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/webapp/css/style.css}">
 </head>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
 
 
 <body>
@@ -68,72 +70,32 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="card mb-4 mb-md-0">
-                                <div class="card-body">
-                                    <p class="mb-4"><span class="text-primary font-italic me-1">assigment</span> Project Status
-                                    </p>
-                                    <p class="mb-1" style="font-size: .77rem;">Web Design</p>
-                                    <div class="progress rounded" style="height: 5px;">
-                                        <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80"
-                                             aria-valuemin="0" aria-valuemax="100"></div>
+                        <table class="table table-dark-striper table-bordered">
+                            <thead class="table-dark">
+                            <tr class="text-center">
+                                <th>Cards</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr width="500" th:each="account : ${accounts}">
+                                <td>
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            <p class="font-weight-bold"  th:text="${account.name}">Account name</p>
+                                            <p th:text="${account.accountNumber}">Account number</p>
+                                            <p th:text="${account.balance} + ' ' + ${account.currency}">Account balance</p>
+                                            <p th:style="${account.active} == TRUE ? '' : 'background: red'" th:text="${account.active} == TRUE ? '' : 'blocked'"></p>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <p><button class="btn btn-secondary btn-size">Transfer</button></p>
+                                            <p><button class="btn btn-secondary btn-size">History</button></p>
+                                            <p><button class="btn btn-secondary btn-size">Block</button></p>
+                                        </div>
                                     </div>
-                                    <p class="mt-4 mb-1" style="font-size: .77rem;">Website Markup</p>
-                                    <div class="progress rounded" style="height: 5px;">
-                                        <div class="progress-bar" role="progressbar" style="width: 72%" aria-valuenow="72"
-                                             aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <p class="mt-4 mb-1" style="font-size: .77rem;">One Page</p>
-                                    <div class="progress rounded" style="height: 5px;">
-                                        <div class="progress-bar" role="progressbar" style="width: 89%" aria-valuenow="89"
-                                             aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <p class="mt-4 mb-1" style="font-size: .77rem;">Mobile Template</p>
-                                    <div class="progress rounded" style="height: 5px;">
-                                        <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="55"
-                                             aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <p class="mt-4 mb-1" style="font-size: .77rem;">Backend API</p>
-                                    <div class="progress rounded mb-2" style="height: 5px;">
-                                        <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66"
-                                             aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="card mb-4 mb-md-0">
-                                <div class="card-body">
-                                    <p class="mb-4"><span class="text-primary font-italic me-1">assigment</span> Project Status
-                                    </p>
-                                    <p class="mb-1" style="font-size: .77rem;">Web Design</p>
-                                    <div class="progress rounded" style="height: 5px;">
-                                        <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80"
-                                             aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <p class="mt-4 mb-1" style="font-size: .77rem;">Website Markup</p>
-                                    <div class="progress rounded" style="height: 5px;">
-                                        <div class="progress-bar" role="progressbar" style="width: 72%" aria-valuenow="72"
-                                             aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <p class="mt-4 mb-1" style="font-size: .77rem;">One Page</p>
-                                    <div class="progress rounded" style="height: 5px;">
-                                        <div class="progress-bar" role="progressbar" style="width: 89%" aria-valuenow="89"
-                                             aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <p class="mt-4 mb-1" style="font-size: .77rem;">Mobile Template</p>
-                                    <div class="progress rounded" style="height: 5px;">
-                                        <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="55"
-                                             aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <p class="mt-4 mb-1" style="font-size: .77rem;">Backend API</p>
-                                    <div class="progress rounded mb-2" style="height: 5px;">
-                                        <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66"
-                                             aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                                    <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+                                </td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </div>

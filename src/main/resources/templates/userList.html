@@ -20,11 +20,12 @@
     <table class="table table-dark-striper table-bordered">
         <thead class="table-dark">
         <tr class="text-center">
-            <th>Client First Name</th>
-            <th>Client Last Name</th>
-            <th>Client Email</th>
-            <th>Client Email</th>
-            <th> Actions </th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Phone number</th>
+            <th>Email</th>
+            <th>Active</th>
+            <th>Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -33,6 +34,7 @@
             <td width="100" th:text="${user.lastName}"></td>
             <td width="100" th:text="${user.login}"></td>
             <td width="100" th:text="${user.email}"></td>
+            <td width="100" th:style="${user.isActive} == TRUE ? '' : 'background: red'" th:text="${user.isActive}"></td>
             <td width="200">
                 <div>
                     <div class="row d-flex justify-content-center">

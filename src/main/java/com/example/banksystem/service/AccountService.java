@@ -2,6 +2,7 @@ package com.example.banksystem.service;
 
 import com.example.banksystem.entity.Account;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface AccountService {
@@ -12,4 +13,5 @@ public interface AccountService {
     Account update(Account account);
     void delete(Long id);
     void block(Long id);
+    void replenish(Long id, BigDecimal value);
 }
